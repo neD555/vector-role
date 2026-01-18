@@ -1,0 +1,25 @@
+# managed by ansible
+data_dir: /var/lib/vector
+
+sources:
+{% if vector_sources | length == 0 %}
+  dummy:
+    type: demo_logs
+{% else %}
+{{ vector_sources | to_nice_yaml(indent=2) | indent(2, true) }}
+{% endif %}
+
+sinks:
+{% if vector_sinks | length == 0 %}
+  console:
+    type: console
+    inputs: ["dummy"]
+    encoding:
+      codec: json
+{% else %}
+{{ vector_sinks | to_nice_yaml(indent=2) | indent(2, true) }}
+{% endif %}
+
+{% if vector_extra_config | length > 0 %}
+{{ vector_extra_config | to_nice_yaml }}
+{% endif %}
