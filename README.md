@@ -1,8 +1,8 @@
-# vector-role
+vector-role
 
 Ansible role for installing and configuring Vector
 
-## Variables
+ Variables
 vector_version
 vector_package_type
 vector_config_file
